@@ -34,3 +34,12 @@ school_name.fac        count  mean    sd
 1 Jones Middle School       48  69.2 119. 
 2 Burton Middle School      28  17.1  47.5
 3 Incandenza High School    18  25.8  35.6
+
+#group by with multiple variables
+grouped %>%
+  + group_by(school_name.fac) %>%
+  + summarise(across(number_active_students:vocabulary, mean))
+
+grouped %>%
+  +   group_by(subject.fac) %>%
+  +   summarise(across(number_active_students:vocabulary, mean))
