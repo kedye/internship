@@ -25,3 +25,12 @@ school_name.fac        count  mean    sd
 1 Jones Middle School       48  55.9  63.2
 2 Burton Middle School      28  25.7  48.0
 3 Incandenza High School    18  36.3  41.3
+
+group_by(smallanon.clean, school_name.fac) %>%
+  + summarise(count = n(), mean = mean(total_active_learning_time, na.rm = TRUE), sd = sd(total_active_learning_time, na.rm = TRUE))
+# A tibble: 3 × 4
+school_name.fac        count  mean    sd
+<fct>                  <int> <dbl> <dbl>
+1 Jones Middle School       48  69.2 119. 
+2 Burton Middle School      28  17.1  47.5
+3 Incandenza High School    18  25.8  35.6
