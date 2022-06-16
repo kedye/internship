@@ -41,5 +41,18 @@ grouped %>%
   + summarise(across(number_active_students:vocabulary, mean))
 
 grouped %>%
-  +   group_by(subject.fac) %>%
-  +   summarise(across(number_active_students:vocabulary, mean))
+  group_by(subject.fac) %>%
+  summarise(across(number_active_students:vocabulary, mean)) %>%
+  view()
+
+
+smallanoncombined <- smallanoncombined %>%
+  mutate(total_activetime = total_active_learning_time + total_active_learning_time_for_co_taught_classes)
+
+#plot
+ggplot(smallanoncombined, aes(x = total_activetime, y = school_name.fac, color = school_name.fac)) + 
+  geom_jitter(width = 0, alpha = 0.8) + 
+  theme(legend.position = "none")
+
+smallanoncombined <- smallanoncombined %>%
+  mutate(total_activetime = total_active_learning_time + total_active_learning_time_for_co_taught_classes, total_activestudents = number_active_students + number_active_students_for_co_taught_classes, totalassignments = number_of_assignments + number_of_assignments_for_co_taught_classes)
