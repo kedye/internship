@@ -1,10 +1,10 @@
 ---
-title: "Actively Learn Report"
+title: "AL Report"
 description: |
-  Examination of Actively Learn data from 21-22
+  Examination of AL data from 21-22
 author:
   - name: Kasey Dye
-    affiliation: CCPS Office of Research & Evaluation
+    affiliation:  Office of Research & Evaluation
 date: "`r Sys.Date()`"
 output: 
   distill::distill_article:
