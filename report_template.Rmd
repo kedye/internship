@@ -1,0 +1,85 @@
+---
+title: "Actively Learn Report"
+description: |
+  Examination of Actively Learn data from 21-22
+author:
+  - name: Kasey Dye
+    affiliation: CCPS Office of Research & Evaluation
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+---
+
+# Executive Summary
+
+TODO LATER
+
+# Background
+
+ADD SOME BACKGROUND HERE. A PARAGRAPH OR SO.
+
+# To Include
+
+- Teacher Usage. By School and by Content. And by District
+- Group usage by types: using existing assignments; personalizing; not using at all
+- Variance within schools/content
+- Usage by school level -- MS/HS
+- Potentially bring in SOL data, although some concerns about this
+- Identify gaps in available data that would be useful to ask for
+
+# Teacher Usage
+
+## Division-Level
+
+```{r setup, include = FALSE, echo = FALSE}
+library(tidyverse)
+
+df_raw <- read_csv(here::here("data/small_df_anon.csv"))
+
+# combine co-taught stuff
+df <- df_raw |>
+    mutate(
+        total_ss = number_active_students + number_active_students_for_co_taught_classes,
+        total_assign = number_of_assignments + number_of_assignments_for_co_taught_classes,
+        total_s_time = total_active_learning_time + total_active_learning_time_for_co_taught_classes
+    ) |>
+    # standardize time per student
+    mutate(
+        time_per_s = total_s_time / total_ss
+    )
+# may want to clean this up a little more
+```
+
+some exploratory plots:
+
+total time per student for all teachers
+
+```{r}
+ggplot(df, aes(time_per_s)) +
+    geom_histogram() +
+    labs(
+        x = "Hours of Usage per Student",
+        y = "Count of Teachers"
+    ) +
+    theme_minimal()
+```
+
+total assignments
+
+```{r}
+ggplot(df, aes(total_assign)) +
+    geom_histogram() +
+    labs(
+        x = "Assignments",
+        y = "Count of Teachers"
+    ) +
+    theme_minimal()
+```
+
+explore the people with 0 assignments some more... why is this the way it is.
+
+# Ideas
+
+- try a dot and whisker plot to look at variance within schools
